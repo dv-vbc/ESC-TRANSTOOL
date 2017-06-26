@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.idealclover.java.fw.fx.esckit.dao.ISgccKbDocMapper">
+    <cache />
+     
+    <select id="getModel" resultType="SgccKbDoc">
+        select * from esc.sgcc_kb_doc where id = #{id}
+    </select>
+    
+    <resultMap type="net.idealclover.java.fw.fx.esckit.po.SgccKbDoc" id="sgccKbDocMap">
+        <!-- property 表示com.mybatis.bean.StudentTemp中的属性； column 表示表中的列名 -->
+        <id property="id" column="id" />
+        <result property="oper" column="oper" />
+        <result property="opdept" column="opdept" />
+        <result property="optime" column="optime" />
+        <result property="docDomain" column="doc_domain" />
+        <result property="docType" column="doc_type" />
+        <result property="docLevel" column="doc_level" />
+        <result property="docState" column="doc_state" />
+        <result property="keyword" column="keyword" />
+        <result property="title" column="title" />
+        <result property="summary" column="summary" />
+        <result property="author" column="author" />
+        <result property="uploadtime" column="uploadtime" />
+        <result property="previewCount" column="preview_count" />
+        <result property="downloadCount" column="download_count" />
+        <result property="fileId" column="file_id" />
+        <result property="sn" column="sn" />
+        <result property="sync" column="sync" />
+        <result property="docDomainName" column="doc_domain_name" />
+        <result property="docTypeName" column="doc_type_name" />
+
+        <!-- association字面意思关联，这里只专门做一对一关联； property表示是com.mybatis.bean.StudentTemp中的属性名称； 
+        javaType表示该属性是什么类型对象 -->
+        <association property="sgccPFile" javaType="net.idealclover.java.fw.fx.esckit.po.SgccPFile">
+            <!-- property 表示com.mybatis.bean.Class中的属性； column 表示表中的列名 -->
+            <id property="id" column="id" />
+            <result property="filename" column="filename" />
+            <result property="filepath" column="filepath" />
+            <result property="filetype" column="filetype" />
+            <result property="filesize" column="filesize" />
+            <result property="uploadtime" column="uploadtime" />
+            <result property="uploadopr" column="uploadopr" />
+            <result property="modifytime" column="modifytime" />
+            <result property="modifyopr" column="modifyopr" />
+            <result property="modifycount" column="modifycount" />
+            <result property="oldname" column="oldname" />
+            <result property="storeType" column="store_type" />
+            <result property="relapath" column="relapath" />
+        </association>
+    </resultMap>
+    
+    <select id="list" resultMap="sgccKbDocMap">
+        select d.*,
+        f.*,
+        (select name
+        from sgpm.p_code a1
+        where a1.code_type = 'docdomain'
+        and a1.value = d.doc_domain) doc_domain_name,
+        (select name
+        from sgpm.p_code a1
+        where a1.code_type = 'docitem'
+        and a1.value = d.doc_type) doc_type_name
+        from esc.sgcc_kb_doc d
+        left join esc.sgcc_p_file f
+        on d.file_id = f.id
+        where 1 = 1
+        and d.sync = '1'
+        and trunc(d.optime, 'dd') between to_date(#{arg0}, 'yyyy-mm-dd') and
+        to_date(#{arg1}, 'yyyy-mm-dd')
+        order by d.id
+    </select>
+    
+    <insert id="save" parameterType="net.idealclover.java.fw.fx.esckit.po.SgccKbDoc">
+        <selectKey resultType="long" keyProperty="id" order="BEFORE">
+            select esc.seq_sgcc_kb_doc_id.nextval from dual
+        </selectKey>
+        insert into esc.sgcc_kb_doc
+        (id, oper, opdept, optime, doc_domain, doc_type,
+        doc_level, doc_state, keyword, title, summary,
+        author, uploadtime, preview_count, download_count, file_id,
+        sn, sync)
+        values
+        (#{id}, #{oper}, #{opdept}, #{optime}, #{docDomain}, #{docType}, 
+        #{docLevel}, #{docState}, #{keyword}, #{title}, #{summary}, 
+        #{author}, #{uploadtime}, #{previewCount}, #{downloadCount}, #{fileId}, 
+        #{sn}, #{sync})
+    </insert>
+    
+    <insert id="saveFile" parameterType="net.idealclover.java.fw.fx.esckit.po.SgccPFile">
+        <selectKey resultType="long" keyProperty="id">
+            select esc.seq_sgcc_kb_doc_id.nextval from dual
+        </selectKey>
+        insert into esc.sgcc_p_file
+        (id, filename, filepath, filetype, filesize,
+        uploadtime, uploadopr, modifytime, modifyopr, modifycount,
+        oldname, storetype, relapath)
+        values
+        (#{id}, #{filename}, #{filepath}, #{filetype}, #{filesize}, 
+        #{uploadtime}, #{uploadopr}, #{modifytime}, #{modifyopr}, #{modifycount}, 
+        #{oldname}, #{storetype}, #{relapath})
+    </insert>   
+</mapper>

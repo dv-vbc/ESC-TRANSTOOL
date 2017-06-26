@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.input.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.idealclover.java.fw.fx.esckit.controller.MainController">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="文件">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="退出">
+                            <accelerator>
+                                <KeyCodeCombination alt="DOWN" code="F4" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="操作">
+                    <items>
+                        <MenuItem fx:id="importMi" mnemonicParsing="false" onAction="#import0" text="导入..." />
+                        <MenuItem fx:id="exportMi" mnemonicParsing="false" onAction="#export" text="导出..." />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="帮助">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#about" text="关于..." />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <left>
+        <BorderPane prefHeight="575.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+            <top>
+                <HBox prefHeight="23.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label prefHeight="23.0" text="  上传时间：" />
+                        <DatePicker fx:id="btimeDp" editable="false" />
+                        <Label prefHeight="23.0" text="  至：" />
+                        <DatePicker fx:id="etimeDp" editable="false" />
+                        <Label prefHeight="23.0" text="        " />
+                        <Button fx:id="queryBtn" mnemonicParsing="false" onAction="#query" text="查询" />
+                    </children>
+                    <BorderPane.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                    </BorderPane.margin>
+                </HBox>
+            </top>
+            <center>
+                <TableView fx:id="docTv" prefHeight="522.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="checkboxTc" prefWidth="25.0" />
+                        <TableColumn prefWidth="75.0" text="文档大类" />
+                        <TableColumn prefWidth="75.0" text="文档小类" />
+                        <TableColumn prefWidth="75.0" text="文档标题" />
+                        <TableColumn prefWidth="75.0" text="作者" />
+                        <TableColumn prefWidth="75.0" text="关键字" />
+                        <TableColumn prefWidth="75.0" text="摘要" />
+                        <TableColumn prefWidth="75.0" text="文件名称" />
+                        <TableColumn prefWidth="75.0" text="文件类型" />
+                        <TableColumn prefWidth="75.0" text="文件大小" />
+                        <TableColumn prefWidth="75.0" text="文件原名" />
+                        <TableColumn prefWidth="75.0" text="文件路径" />
+                        <TableColumn prefWidth="75.0" text="操作员" />
+                        <TableColumn prefWidth="75.0" text="操作时间" />
+                    </columns>
+                    <BorderPane.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                    </BorderPane.margin>
+                </TableView>
+            </center>
+        </BorderPane>
+    </left>
+</BorderPane>
