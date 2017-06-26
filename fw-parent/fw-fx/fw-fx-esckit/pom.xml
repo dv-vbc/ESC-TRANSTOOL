@@ -4,10 +4,9 @@
     <parent>
         <artifactId>fw-fx</artifactId>
         <groupId>net.idealclover.java</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <artifactId>fw-fx-esckit</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <properties>
