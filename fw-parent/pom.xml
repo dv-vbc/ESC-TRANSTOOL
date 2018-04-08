@@ -197,13 +197,13 @@
                 <version>${mysql.connector.version}</version>  
             </dependency> 
             <!-- mysql-connector end --> 
-            <!-- mysql-connector begin -->  
+            <!-- oracle-ojdbc6 begin -->  
             <dependency>
                 <groupId>com.oracle</groupId>
-                <artifactId>ojdbc7</artifactId>
-                <version>12.1.0.2</version>
+                <artifactId>ojdbc6</artifactId>
+                <version>12.1.0.1</version>
             </dependency>
-            <!-- mysql-connector end --> 
+            <!-- oracle-ojdbc6 end --> 
             <!-- spring begin -->
             <dependency>
                 <groupId>org.springframework</groupId>
