@@ -293,21 +293,21 @@ public class MainController implements FXMLController {
         }
 
         // 数据录入数据库
-//        DocCompassUtil docCu = new DocCompassUtil();
+        DocCompassUtil docCu = new DocCompassUtil();
         for (DocSerializableVo dsvo1 : dsvolist) {
             service.saveDoc(dsvo1, fileidmap);
-//            DocSearch smodel = new DocSearch();
-//            smodel.setId(String.valueOf(dsvo1.getId()));
-//            smodel.setDocdomain(dsvo1.getDocDomain());
-//            smodel.setDoctype(dsvo1.getDocType());
-//            smodel.setKeyword(dsvo1.getKeyword());
-//            smodel.setTitle(dsvo1.getTitle());
-//            smodel.setAuthor(dsvo1.getAuthor());
-//            smodel.setUploadtime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-//            smodel.setFileid(String.valueOf(dsvo1.getFileId()));
-//            smodel.setSummary(dsvo1.getSummary());
-//            smodel.setContent(dsvo1.getKeyword() + dsvo1.getSummary());
-//            docCu.index(smodel);
+            DocSearch smodel = new DocSearch();
+            smodel.setId(String.valueOf(dsvo1.getId()));
+            smodel.setDocdomain(dsvo1.getDocDomain());
+            smodel.setDoctype(dsvo1.getDocType());
+            smodel.setKeyword(dsvo1.getKeyword());
+            smodel.setTitle(dsvo1.getTitle());
+            smodel.setAuthor(dsvo1.getAuthor());
+            smodel.setUploadtime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            smodel.setFileid(String.valueOf(dsvo1.getFileId()));
+            smodel.setSummary(dsvo1.getSummary());
+            smodel.setContent(dsvo1.getKeyword() + dsvo1.getSummary());
+            docCu.index(smodel);
         }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
